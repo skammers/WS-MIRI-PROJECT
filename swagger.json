@@ -153,9 +153,9 @@
                 }
             }
         },
-        "/user/(ReviewID)": {
+        "/user/(Review)": {
             "delete": {
-                "summary": "Delete review with ID",
+                "summary": "Delete review",
                 "description": "Delete review",
                 "responses": {
                     "200": {
@@ -163,7 +163,7 @@
                         "headers": {
                             "Location": {
                                 "type": "string",
-                                "description": "The Server returns the URL to create a new review"
+                                "description": "The Server returns the URL to create a new review if youd like to do that"
                             }
                         }
                     },
