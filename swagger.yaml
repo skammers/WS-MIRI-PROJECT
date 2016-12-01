@@ -1,0 +1,362 @@
+# Example YAML to get you started quickly.
+# Be aware that YAML has indentation based scoping.
+# Code completion support is available so start typing for available options.
+swagger: '2.0'
+
+# This is your document metadata
+info:
+  version: "1.0.0"
+  title: Weeb Api Document
+
+# Describe your paths here
+paths:
+  # This is a path endpoint. Change it.
+  
+  /supermarket/category/product:
+  
+    get:
+          summary: Get product
+          description: Get product by id
+          parameters:
+            - name: body
+              in: body
+              required: true
+              schema:
+                  title: id
+                  type: string
+                  properties:
+                    id:
+                      type: string
+              description: The id that is used for search
+          responses:
+            200:
+              description: OK
+              headers:
+                Location:
+                  type: string
+                  description: Returns the URL to make it level three
+            404:
+              description: Not found
+  
+  /supermarket/category:
+  
+    get:
+        summary: Get category
+        description: Get category by id
+        parameters:
+          - name: body
+            in: body
+            required: true
+            schema:
+                title: id
+                type: string
+                properties:
+                  id:
+                    type: string
+            description: The id that is used for search
+        responses:
+          200:
+            description: OK
+            headers:
+              Location:
+                type: string
+                description: Returns the URL to make it level three
+          404:
+            description: Not found
+  
+  
+  /supermarket:
+    get:
+      summary: Get supermarket
+      description: Get supermarket by id
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+              title: id
+              type: string
+              properties:
+                id:
+                  type: string
+          description: The id that is used for search
+      responses:
+        200:
+          description: OK
+          headers:
+            Location:
+              type: string
+              description: Returns the URL to make it level three
+        404:
+          description: Not found
+  
+  
+  /supermarket/location:
+    get:
+      summary: Get Location
+      description: Get location by string
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+              title: latlong
+              type: string
+              properties:
+                id:
+                  type: string
+          description: The coordination in string of location
+      responses:
+        200:
+          description: OK
+          headers:
+            Location:
+              type: string
+              description: Returns the URL of the location
+        404:
+          description: Not found
+    
+    
+  
+  
+  /user/(ReviewID):
+    # This is a HTTP operation
+    delete:
+      summary: Delete review with ID
+      description: Delete review
+      responses:
+        200:
+          description: OK - Review deleted
+          headers:
+            Location:
+              type: string
+              description: The Server returns the URL to create a new review
+        401: 
+          description: Not authorized
+    
+    
+    put:
+      summary: Update Review with id = id
+      description: Update Review
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+              title: Review
+              type: object
+              properties:
+                name:
+                  type: string
+                id:
+                  type: string
+          description: The review to update
+          
+      responses:
+        404: 
+          description: Not found
+        200:
+          description: OK
+          schema:
+              title: Review
+              type: object
+              properties:
+                name:
+                  type: string
+                id:
+                  type: string
+                  
+          headers:
+            Location:
+              type: string
+              description: The Server returns the URL of the updated review
+
+          
+    
+    
+    post:
+      summary: Creates a new review
+      description: Create new review
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+              title: Review
+              type: object
+              properties:
+                name:
+                  type: string
+                id:
+                  type: string
+          description: The review to create
+      responses:
+        201:
+          description: New review was created successfully
+          schema:
+              title: User
+              type: object
+              properties:
+                name:
+                  type: string
+                id:
+                  type: string
+          headers:
+            Location:
+              type: string
+              description: The Server returns the URL of the new review
+  
+    get:
+      summary: Get Review
+      description: Get review by id
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+              title: Id
+              type: string
+              properties:
+                id:
+                  type: string
+          description: The id of the review to get
+      responses:
+        200:
+          description: OK
+          headers:
+            Location:
+              type: string
+              description: Returns the URL of the review
+        404:
+          description: Not found
+    
+  
+  /user:
+    # This is a HTTP operation
+    delete:
+      summary: Delete user with ID
+      description: Delete user
+      responses:
+        200:
+          description: OK - User deleted
+          headers:
+            Location:
+              type: string
+              description: The Server returns the URL to create a new user
+        401: 
+          description: Not authorized
+    
+    
+    put:
+      summary: Update user with id = id
+      description: Update user
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+              title: User
+              type: object
+              properties:
+                name:
+                  type: string
+                id:
+                  type: string
+          description: The user account to update
+          
+      responses:
+        404: 
+          description: Not found
+        200:
+          description: OK
+          schema:
+              title: User
+              type: object
+              properties:
+                name:
+                  type: string
+                id:
+                  type: string
+                  
+          headers:
+            Location:
+              type: string
+              description: The Server returns the URL of the updated user
+
+          
+    
+    
+    post:
+      summary: Creates a new user
+      description: Only the "admin" user can create users.
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+              title: User
+              type: object
+              properties:
+                name:
+                  type: string
+                id:
+                  type: string
+          description: The user account to create
+      responses:
+        201:
+          description: New user was created successfully
+          schema:
+              title: User
+              type: object
+              properties:
+                name:
+                  type: string
+                id:
+                  type: string
+          headers:
+            Location:
+              type: string
+              description: The Server returns the URL of the new user
+        401:
+          description: Not authorized
+    
+    
+    get:
+      # Describe this verb here. Note: you can use markdown
+      description: |
+        Gets 'User' object by ID 
+      # This is array of GET operation parameters:
+      parameters:
+        # An example parameter that is in query and is required
+        -
+          name: id
+          in: query
+          description: User
+          required: true
+          type: string
+          format: string
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        200:
+          description: Successful response
+          # A schema describing your response object.
+          # Use JSON Schema format
+          schema:
+              title: User
+              type: object
+              properties:
+                name:
+                  type: string
+                id:
+                  type: string
+          headers:
+            Location:
+              type: string
+              description: The Server returns the URL of the user
+        404:
+          description: User not found
+          
+      
+                  
+   
